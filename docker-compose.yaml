@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  frontend-svc:
+    build: .
+    restart: always
+    environment:
+      JWT_SECRET_KEY: secret
+      JWT_EXPIRATION_TIME: '1d'
+      JWT_ISS: eJKgSgQnqnXYXqF8Wl81blzrV2CLhFLs
+      NEXTAPP_URL: http://178.128.26.253
+      NEXTBACKED_URL: http://178.128.26.253:8000/v1
+      NEXTAUTH_URL: http://178.128.26.253
+      NODE_ENV: 'development'
+    networks:
+      - api-gateway_kong-net
+    ports:
+      - "80:3000"
+
+networks:
+  api-gateway_kong-net:
+    external: true
